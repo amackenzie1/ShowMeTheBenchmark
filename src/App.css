@@ -1,4 +1,5 @@
 .App {
+  font-family: serif;
   text-align: center;
 }
 
@@ -6,6 +7,17 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+.InputForm {
+  color: purple;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 35px;
+  grid-gap: 0px 10px;
+  align-items: center;
+  justify-items: left;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

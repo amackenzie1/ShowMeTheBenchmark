@@ -16,8 +16,9 @@ class MyForm extends React.Component<FormProps, FormState> {
   constructor(props: FormProps){
     super(props);
     let today = new Date().toISOString().split("T")[0];
+    let one_year_back = new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().split("T")[0];
     this.state = {
-      cash: 0,
+      cash: 100,
       canadian_equities: 0,
       canadian_div: 0,
       canadian_growth: 0,
@@ -30,7 +31,7 @@ class MyForm extends React.Component<FormProps, FormState> {
       reits: 0,
       fixed_income: 0,
       fixed_income_rate: 0,
-      start: today,
+      start: one_year_back,
       end: today,
       submitted: false,
       calculated: 0

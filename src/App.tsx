@@ -10,6 +10,23 @@ type FormProps = {
 interface FormState extends CalculatorInfo {
   submitted: boolean
   calculated: number
+  total_percentage: number
+}
+
+function getSum(state: FormState): number{
+  let sum = state.cash + 
+            state.canadian_div + 
+            state.canadian_equities + 
+            state.canadian_growth + 
+            state.emerging + 
+            state.int + 
+            state.reits + 
+            state.fixed_income + 
+            state.world +
+            state.us +
+            state.us_tech + 
+            state.scotia_hedge_fund 
+  return Math.round(sum)
 }
 
 class MyForm extends React.Component<FormProps, FormState> {
@@ -34,17 +51,22 @@ class MyForm extends React.Component<FormProps, FormState> {
       start: one_year_back,
       end: today,
       submitted: false,
-      calculated: 0
+      calculated: 0,
+      total_percentage: 0
     }
   }
   render(){
     return (
       <div>
-        {this.state.submitted && 
-          <p>
+        {this.state.submitted && (this.state.total_percentage === 100 ? 
+            <p>
             Investment return: <u>{this.state.calculated}%</u>
-          </p>
-        }
+            </p>
+            :
+            <p style={{color: "#ff355e"}}>
+            <i>Error: the percentages you entered add up to {this.state.total_percentage}%. <br/> Consider changing them to add up to 100%?</i>
+            </p>
+        )}
         <div className='InputForm'>
           <p style={{"color": "black", "gridColumnStart": 2}}>Start Date:</p>
           <input type="date" value={this.state.start} onChange={(e) => this.setState({start: e.target.value})}/>
@@ -71,6 +93,10 @@ class MyForm extends React.Component<FormProps, FormState> {
           <input value={this.state.us_tech} onChange={(e) => this.setState({us_tech: parseFloat(e.target.value) || 0})}/>
           <p>REITs:</p>
           <input value={this.state.reits} onChange={(e) => this.setState({reits: parseFloat(e.target.value) || 0})}/>
+          <p style={{"color": 'violet'}}>Total allocated: </p>
+          <p style={{"color": 'white'}}><u>{
+            getSum(this.state)
+          }%</u></p>
         </div>
         <p/>
         <div className='InputForm'> 
@@ -80,7 +106,7 @@ class MyForm extends React.Component<FormProps, FormState> {
           <input value={this.state.fixed_income_rate} onChange={(e) => this.setState({fixed_income_rate: parseFloat(e.target.value) || 0})}/>
         </div>
         <p></p>
-        <button onClick={() => this.setState({submitted: true, calculated: calculate(this.state)})}>Submit</button>
+        <button onClick={() => this.setState({submitted: true, calculated: calculate(this.state), total_percentage: getSum(this.state)})}>Submit</button>
         <p>{/*JSON.stringify(this.state)*/}</p>
       </div>
     )

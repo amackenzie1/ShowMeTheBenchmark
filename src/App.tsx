@@ -63,8 +63,8 @@ class MyForm extends React.Component<FormProps, FormState> {
             Investment return: <u>{this.state.calculated}%</u>
             </p>
             :
-            <p style={{color: "#ff355e"}}>
-            <i>Error: the percentages you entered add up to {this.state.total_percentage}%. <br/> Consider changing them to add up to 100%?</i>
+            <p style={{color: "#ff66cc"}}>
+            <i>Error: the percentages you entered add up to {this.state.total_percentage}%. <br/> You might want to double check and verify they add up to 100%.</i>
             </p>
         )}
         <div className='InputForm'>

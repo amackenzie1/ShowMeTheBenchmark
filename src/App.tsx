@@ -15,17 +15,13 @@ interface FormState extends CalculatorInfo {
 
 function getSum(state: FormState): number{
   let sum = state.cash + 
-            state.canadian_div + 
+            state.canadian_fixed_income + 
             state.canadian_equities + 
-            state.canadian_growth + 
-            state.emerging + 
-            state.int + 
-            state.reits + 
-            state.fixed_income + 
-            state.world +
-            state.us +
-            state.us_tech + 
-            state.scotia_hedge_fund 
+            state.us_equities + 
+            state.emerging_markets + 
+            state.global_equities + 
+            state.real_estate + 
+            state.fixed_income
   return Math.round(sum)
 }
 
@@ -37,15 +33,11 @@ class MyForm extends React.Component<FormProps, FormState> {
     this.state = {
       cash: 100,
       canadian_equities: 0,
-      canadian_div: 0,
-      canadian_growth: 0,
-      us: 0,
-      int: 0,
-      world: 0,
-      us_tech: 0,
-      scotia_hedge_fund: 0,
-      emerging: 0,
-      reits: 0,
+      canadian_fixed_income: 0,
+      us_equities: 0,
+      global_equities: 0,
+      emerging_markets: 0,
+      real_estate: 0,
       fixed_income: 0,
       fixed_income_rate: 0,
       start: one_year_back,
@@ -75,24 +67,20 @@ class MyForm extends React.Component<FormProps, FormState> {
         </div>
         <p/>
         <div className='InputForm'>
-          <p>Cash:</p>
+          <p>Cash [CMR]:</p>
           <input value={this.state.cash} onChange={(e) => this.setState({cash: parseFloat(e.target.value) || 0})}/>
-          <p>Canadian Equities:</p>
+          <p>Can. Equities [XIC]:</p>
           <input value={this.state.canadian_equities} onChange={(e) => this.setState({canadian_equities: parseFloat(e.target.value) || 0})}/>
-          <p>Canadian Dividend:</p>
-          <input value={this.state.canadian_div} onChange={(e) => this.setState({canadian_div: parseFloat(e.target.value) || 0})}/>
-          <p>Canadian Growth:</p>
-          <input value={this.state.canadian_growth} onChange={(e) => this.setState({canadian_growth: parseFloat(e.target.value) || 0})}/>
-          <p>US:</p>
-          <input value={this.state.us} onChange={(e) => this.setState({us: parseFloat(e.target.value) || 0})}/>
-          <p>International:</p>
-          <input value={this.state.int} onChange={(e) => this.setState({int: parseFloat(e.target.value) || 0})}/>   
-          <p>World:</p>
-          <input value={this.state.world} onChange={(e) => this.setState({world: parseFloat(e.target.value) || 0})}/>
-          <p>US Tech:</p>
-          <input value={this.state.us_tech} onChange={(e) => this.setState({us_tech: parseFloat(e.target.value) || 0})}/>
-          <p>REITs:</p>
-          <input value={this.state.reits} onChange={(e) => this.setState({reits: parseFloat(e.target.value) || 0})}/>
+          <p>Can. Fixed Income [XBB]:</p>
+          <input value={this.state.canadian_fixed_income} onChange={(e) => this.setState({canadian_fixed_income: parseFloat(e.target.value) || 0})}/>
+          <p>US Equities [XSP]:</p>
+          <input value={this.state.us_equities} onChange={(e) => this.setState({us_equities: parseFloat(e.target.value) || 0})}/>
+          <p>Emerging Markets [XEM]:</p>
+          <input value={this.state.emerging_markets} onChange={(e) => this.setState({emerging_markets: parseFloat(e.target.value) || 0})}/>   
+          <p>Global Equities [XIN]:</p>
+          <input value={this.state.global_equities} onChange={(e) => this.setState({global_equities: parseFloat(e.target.value) || 0})}/>
+          <p>Real Estate [XRE]:</p>
+          <input value={this.state.real_estate} onChange={(e) => this.setState({real_estate: parseFloat(e.target.value) || 0})}/>
           <p style={{"color": 'violet'}}>Total allocated: </p>
           <p style={{"color": 'white'}}><u>{
             getSum(this.state)
@@ -102,7 +90,7 @@ class MyForm extends React.Component<FormProps, FormState> {
         <div className='InputForm'> 
           <p style={{"color": "pink", "gridColumnStart": 2}}>Fixed Income:</p>
           <input value={this.state.fixed_income} onChange={(e) => this.setState({fixed_income: parseFloat(e.target.value) || 0})}/>
-          <p style={{"color": "pink", "gridColumnStart": 2}}>Fixed Income Rate:</p>
+          <p style={{"color": "pink", "gridColumnStart": 2}}>Rate:</p>
           <input value={this.state.fixed_income_rate} onChange={(e) => this.setState({fixed_income_rate: parseFloat(e.target.value) || 0})}/>
         </div>
         <p></p>

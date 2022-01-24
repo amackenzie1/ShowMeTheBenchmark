@@ -3,7 +3,7 @@ import predata from "./stock_market.json"
 
 
 type Info = "date" | "open" | "high" | "low" | "close" | "adj_close" | "volume"
-type Acronym = "CDZ" | "IGM" | "XBB" | "XCG" | "XIC" | "XIN" | "XIU" | "XRE" | "XSP" | "XWD"
+type Acronym = "CDZ" | "IGM" | "XBB" | "XCG" | "XIC" | "XIN" | "XIU" | "XRE" | "XSP" | "XWD" | "CMR" | "XSB" | "XEM" | "XQQ"
 
 type InvestmentRecord = {
     [key in Info]: string
@@ -15,27 +15,6 @@ type InvestmentData = {
 
 let data: InvestmentData = predata as InvestmentData;
 
-function get_abbreviation(x: string): Acronym | null{
-    if (x === "canadian_equities"){
-        return "XIC"
-    } else if (x === "canadian_div"){
-        return "CDZ"
-    } else if (x === "canadian_growth"){
-        return "XCG"
-    } else if (x === "us"){
-        return "XSP"
-    } else if (x === "int"){
-        return "XIN"
-    } else if (x === "world"){
-        return "XWD"
-    } else if (x === "us_tech"){
-        return "IGM"
-    } else if (x === "reits"){
-        return "XRE"
-    } else {
-        return null
-    }
-}
 
 function dateIndex(date: string, lookup: Record<string, InvestmentRecord>){
     let counter = 0;
@@ -61,15 +40,13 @@ function getChange(start: string, end: string, abbreviation: Acronym): number {
 
 function calculate(investments: CalculatorInfo): number {
     let total = 0;
-    total += investments.cash;
+    total += investments.cash * getChange(investments.start, investments.end, "CMR");
     total += investments.canadian_equities * getChange(investments.start, investments.end, "XIC");
-    total += investments.canadian_div * getChange(investments.start, investments.end, "CDZ");
-    total += investments.canadian_growth * getChange(investments.start, investments.end, "XCG");
-    total += investments.us * getChange(investments.start, investments.end, "XSP");
-    total += investments.int * getChange(investments.start, investments.end, "XIN");
-    total += investments.world * getChange(investments.start, investments.end, "XWD");
-    total += investments.us_tech * getChange(investments.start, investments.end, "IGM");
-    total += investments.reits * getChange(investments.start, investments.end, "XRE");
+    total += investments.canadian_fixed_income * getChange(investments.start, investments.end, "XBB");
+    total += investments.us_equities * getChange(investments.start, investments.end, "XSP");
+    total += investments.emerging_markets * getChange(investments.start, investments.end, "XEM");
+    total += investments.global_equities * getChange(investments.start, investments.end, "XIN");
+    total += investments.real_estate * getChange(investments.start, investments.end, "XRE");
     let milliseconds = (new Date(investments.end)).getTime() - new Date(investments.start).getTime();
     let num_days = milliseconds / (1000 * 60 * 60 * 24);
     total += investments.fixed_income * (1 + investments.fixed_income_rate/100)**(num_days/365);

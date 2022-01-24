@@ -68,9 +68,9 @@ class MyForm extends React.Component<FormProps, FormState> {
             </p>
         )}
         <div className='InputForm'>
-          <p style={{"color": "black", "gridColumnStart": 2}}>Start Date:</p>
+          <p style={{"color": "white", "gridColumnStart": 2}}>Start Date:</p>
           <input type="date" value={this.state.start} onChange={(e) => this.setState({start: e.target.value})}/>
-          <p style={{"color": "black", "gridColumnStart": 2}}>End Date:</p>
+          <p style={{"color": "white", "gridColumnStart": 2}}>End Date:</p>
           <input type="date" value={this.state.end} onChange={(e) => this.setState({end: e.target.value})}/>
         </div>
         <p/>

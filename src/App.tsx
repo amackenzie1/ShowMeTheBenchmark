@@ -57,7 +57,7 @@ class MyForm extends React.Component<FormProps, FormState> {
     return (
       <div>
         {this.state.submitted && (this.state.total_percentage === 100 ? 
-          <div className="OutputForm" style={{color: "#ff66cc"}}> 
+          <div className="OutputForm"> 
             <p style={{justifySelf: "right"}}>3 Months:</p>
             <p style={{justifySelf: "left"}}><u>{this.state.three_months}%</u></p>
             <p style={{justifySelf: "right"}}>6 Months:</p>
@@ -99,9 +99,9 @@ class MyForm extends React.Component<FormProps, FormState> {
         </div>
         <p/>
         <div className='InputForm'> 
-          <p style={{"color": "pink", "gridColumnStart": 2}}>Fixed Income:</p>
+          <p style={{"color": "#f6bcf6", "gridColumnStart": 2}}>Fixed Income:</p>
           <input value={this.state.fixed_income} onChange={(e) => this.setState({fixed_income: parseFloat(e.target.value) || 0})}/>
-          <p style={{"color": "pink", "gridColumnStart": 2}}>Rate:</p>
+          <p style={{"color": "#f6bcf6", "gridColumnStart": 2}}>Rate:</p>
           <input value={this.state.fixed_income_rate} onChange={(e) => this.setState({fixed_income_rate: parseFloat(e.target.value) || 0})}/>
         </div>
         <p></p>

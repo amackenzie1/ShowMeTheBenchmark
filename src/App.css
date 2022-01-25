@@ -9,7 +9,7 @@
 }
 
 .InputForm {
-  color: rgb(158, 0, 158);
+  color: #ff2cf4;
   display: grid;
   grid-template-columns: 1fr 0.7fr 1fr 0.7fr;
   grid-auto-rows: 35px;

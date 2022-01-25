@@ -59,7 +59,7 @@ class MyForm extends React.Component<FormProps, FormState> {
         {this.state.submitted && (this.state.total_percentage === 100 ? 
           <div className="OutputForm"> 
             <p style={{justifySelf: "right"}}>3 Months:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.three_months}%</u>%</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.three_months}%</u></p>
             <p style={{justifySelf: "right"}}>6 Months:</p>
             <p style={{justifySelf: "left"}}><u>{this.state.six_months}%</u></p>
             <p style={{justifySelf: "right"}}>1 Year:</p>

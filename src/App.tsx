@@ -9,7 +9,12 @@ type FormProps = {
 
 interface FormState extends CalculatorInfo {
   submitted: boolean
-  calculated: number
+  three_months: number
+  six_months: number
+  one_year: number
+  three_years: number
+  five_years: number
+  ten_years: number
   total_percentage: number
 }
 
@@ -28,8 +33,6 @@ function getSum(state: FormState): number{
 class MyForm extends React.Component<FormProps, FormState> {
   constructor(props: FormProps){
     super(props);
-    let today = new Date().toISOString().split("T")[0];
-    let one_year_back = new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().split("T")[0];
     this.state = {
       cash: 100,
       canadian_equities: 0,
@@ -40,10 +43,13 @@ class MyForm extends React.Component<FormProps, FormState> {
       real_estate: 0,
       fixed_income: 0,
       fixed_income_rate: 0,
-      start: one_year_back,
-      end: today,
       submitted: false,
-      calculated: 0,
+      three_months: 0,
+      six_months: 0,
+      one_year: 0,
+      three_years: 0,
+      five_years: 0,
+      ten_years: 0,
       total_percentage: 0
     }
   }
@@ -51,21 +57,26 @@ class MyForm extends React.Component<FormProps, FormState> {
     return (
       <div>
         {this.state.submitted && (this.state.total_percentage === 100 ? 
-            <p>
-            Investment return: <u>{this.state.calculated}%</u>
-            </p>
+          <div className="OutputForm"> 
+            <p style={{justifySelf: "right"}}>3 Months:</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.three_months}%</u>%</p>
+            <p style={{justifySelf: "right"}}>6 Months:</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.six_months}%</u></p>
+            <p style={{justifySelf: "right"}}>1 Year:</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.one_year}%</u></p>
+            <p style={{justifySelf: "right"}}>3 Years:</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.three_years}%</u></p>
+            <p style={{justifySelf: "right"}}>5 Years:</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.five_years}%</u></p>
+            <p style={{justifySelf: "right"}}>10 Years:</p>
+            <p style={{justifySelf: "left"}}><u>{this.state.ten_years}%</u></p>
+          </div>
             :
             <p style={{color: "#ff66cc"}}>
             <i>Error: the percentages you entered add up to {this.state.total_percentage}%. <br/> You might want to double check and verify they add up to 100%.</i>
             </p>
         )}
-        <div className='InputForm'>
-          <p style={{"color": "white", "gridColumnStart": 2}}>Start Date:</p>
-          <input type="date" value={this.state.start} onChange={(e) => this.setState({start: e.target.value})}/>
-          <p style={{"color": "white", "gridColumnStart": 2}}>End Date:</p>
-          <input type="date" value={this.state.end} onChange={(e) => this.setState({end: e.target.value})}/>
-        </div>
-        <p/>
+        <p><br/></p>
         <div className='InputForm'>
           <p>Cash [CMR]:</p>
           <input value={this.state.cash} onChange={(e) => this.setState({cash: parseFloat(e.target.value) || 0})}/>
@@ -94,7 +105,14 @@ class MyForm extends React.Component<FormProps, FormState> {
           <input value={this.state.fixed_income_rate} onChange={(e) => this.setState({fixed_income_rate: parseFloat(e.target.value) || 0})}/>
         </div>
         <p></p>
-        <button onClick={() => this.setState({submitted: true, calculated: calculate(this.state), total_percentage: getSum(this.state)})}>Submit</button>
+        <button onClick={() => this.setState({submitted: true, 
+          three_months: calculate(this.state, "2021-10-01", "2022-01-01"),
+          six_months: calculate(this.state, "2021-07-01", "2022-01-01"),
+          one_year: calculate(this.state, "2021-01-01", "2022-01-01"),
+          three_years: calculate(this.state, "2019-01-01", "2022-01-01"),
+          five_years: calculate(this.state, "2017-01-01", "2022-01-01"),
+          ten_years: calculate(this.state, "2012-01-01", "2022-01-01"),
+          total_percentage: getSum(this.state)})}>Submit</button>
         <p>{/*JSON.stringify(this.state)*/}</p>
       </div>
     )

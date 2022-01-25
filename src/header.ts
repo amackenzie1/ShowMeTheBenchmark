@@ -8,8 +8,6 @@ type CalculatorInfo = {
     real_estate: number
     fixed_income: number
     fixed_income_rate: number
-    start: string
-    end: string
-  }
+}
 
 export type {CalculatorInfo}

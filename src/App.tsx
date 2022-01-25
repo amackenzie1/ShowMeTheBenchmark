@@ -58,18 +58,18 @@ class MyForm extends React.Component<FormProps, FormState> {
       <div>
         {this.state.submitted && (this.state.total_percentage === 100 ? 
           <div className="OutputForm"> 
-            <p style={{justifySelf: "right"}}>3 Months:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.three_months}%</u></p>
-            <p style={{justifySelf: "right"}}>6 Months:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.six_months}%</u></p>
-            <p style={{justifySelf: "right"}}>1 Year:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.one_year}%</u></p>
-            <p style={{justifySelf: "right"}}>3 Years:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.three_years}%</u></p>
-            <p style={{justifySelf: "right"}}>5 Years:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.five_years}%</u></p>
-            <p style={{justifySelf: "right"}}>10 Years:</p>
-            <p style={{justifySelf: "left"}}><u>{this.state.ten_years}%</u></p>
+            <p style={{gridColumnStart: 2}}>3 Months:</p>
+            <p style={{}}><u>{this.state.three_months}%</u></p>
+            <p style={{}}>6 Months:</p>
+            <p style={{}}><u>{this.state.six_months}%</u></p>
+            <p style={{}}>1 Year:</p>
+            <p style={{}}><u>{this.state.one_year}%</u></p>
+            <p style={{gridColumnStart: 2}}>3 Years:</p>
+            <p style={{}}><u>{this.state.three_years}%</u></p>
+            <p style={{}}>5 Years:</p>
+            <p style={{}}><u>{this.state.five_years}%</u></p>
+            <p style={{}}>10 Years:</p>
+            <p style={{}}><u>{this.state.ten_years}%</u></p>
           </div>
             :
             <p style={{color: "#ff66cc"}}>

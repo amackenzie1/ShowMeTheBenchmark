@@ -97,21 +97,21 @@ class MyForm extends React.Component<FormProps, FormState> {
             getSum(this.state)
           }%</u></p>
         </div>
-        <p/>
+        {/*<p/>
         <div className='InputForm'> 
           <p style={{"color": "#f6bcf6", "gridColumnStart": 2}}>Fixed Income:</p>
           <input value={this.state.fixed_income} onChange={(e) => this.setState({fixed_income: parseFloat(e.target.value) || 0})}/>
           <p style={{"color": "#f6bcf6", "gridColumnStart": 2}}>Rate:</p>
           <input value={this.state.fixed_income_rate} onChange={(e) => this.setState({fixed_income_rate: parseFloat(e.target.value) || 0})}/>
-        </div>
-        <p></p>
+        </div>*/}
+        <p><br/></p>
         <button onClick={() => this.setState({submitted: true, 
           three_months: calculate(this.state, "2021-10-01", "2022-01-01"),
           six_months: calculate(this.state, "2021-07-01", "2022-01-01"),
           one_year: calculate(this.state, "2021-01-01", "2022-01-01"),
-          three_years: calculate(this.state, "2019-01-01", "2022-01-01"),
-          five_years: calculate(this.state, "2017-01-01", "2022-01-01"),
-          ten_years: calculate(this.state, "2012-01-01", "2022-01-01"),
+          three_years: calculate(this.state, "2019-01-01", "2022-01-01", 3),
+          five_years: calculate(this.state, "2017-01-01", "2022-01-01", 5),
+          ten_years: calculate(this.state, "2012-01-01", "2022-01-01", 10),
           total_percentage: getSum(this.state)})}>Submit</button>
         <p>{/*JSON.stringify(this.state)*/}</p>
       </div>

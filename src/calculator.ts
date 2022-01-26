@@ -28,7 +28,7 @@ function getChange(start: string, end: string, key : Acronym): number {
 }
 
 
-function calculate(investments: CalculatorInfo, start: string, end: string): number {
+function calculate(investments: CalculatorInfo, start: string, end: string, annualize?: number): number {
     let total = 0;
     total += investments.cash * getChange(start, end, "CMR");
     total += investments.canadian_equities * getChange(start, end, "XIC");
@@ -41,6 +41,9 @@ function calculate(investments: CalculatorInfo, start: string, end: string): num
     let num_days = milliseconds / (1000 * 60 * 60 * 24);
     total += investments.fixed_income * (1 + investments.fixed_income_rate/100)**(num_days/365);
     total = total / 100;
+    if (annualize){
+        total = total ** (1/annualize);
+    }
     return Math.round((total - 1) * 10000) / 100;
 }
 
